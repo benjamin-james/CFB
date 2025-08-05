@@ -1,0 +1,22 @@
+name = "CFB"
+uuid = "df0432d6-389c-4b6f-b28e-88ba1159b3fa"
+authors = ["Benjamin James <benjames@mit.edu>"]
+version = "0.1.0"
+
+[deps]
+DataFrames = "a93c6f00-e57d-5684-b7b6-d8193f3e46c0"
+Dates = "ade2ca70-3891-5945-98fb-dc099432e06a"
+HTTP = "cd3eb016-35fb-5094-929b-558a96fad6f3"
+JSON3 = "0f8b85d8-7281-11e9-16c2-39a750bddbf1"
+SQLite = "0aa819cd-b072-5ff4-a722-6bc24af294d9"
+StatsKit = "2cb19f9e-ec4d-5c53-8573-a4542a68d3f0"
+TimeZones = "f269a46b-ccf7-5d73-abea-4c690281aa53"
+
+[compat]
+DataFrames = "1.7.0"
+Dates = "1.11.0"
+HTTP = "1.10.17"
+JSON3 = "1.14.3"
+SQLite = "1.6.1"
+StatsKit = "0.3.1"
+TimeZones = "1.22.0"

@@ -1,0 +1,27 @@
+* 1. scrape
+`julia --project=.`
+`] activate .`
+`using CFB;`
+CfbdClient(ENV["CFBD_API_KEY"])
+* 2. clean data, summarize for EPA
+** bad data:
+- Yards gained above 100 yards, yards lost above 100 yards
+- 0th, -1th, or 5th down (Kickoff)
+- period not in 1-4
+- clock_minutes > 15
+- distance <= 0
+- yardLine <= 0, >= 100
+- yardsToGoal <= 0, >= 100
+- offense_timeouts < 0, > 3
+- defense_timeouts < 0, > 3
+- offense_score < 0
+- defense_score < 0
+** todo
+- 
+- add elapsed clock
+-   
+* 3. live update of data
+-> find holes in data (calendar -> completed game -> plays for game not present)
+-> update games (calendar -> week completed -> games not completed (set &week=X&seasonType=Y)
+-> update calendar (calendar-> max season, now().month >= august -> update calendar)
+  -> cascade update games
