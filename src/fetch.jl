@@ -190,7 +190,26 @@ CREATE TABLE IF NOT EXISTS Game (
     SQLite.execute(client.db, "COMMIT TRANSACTION")
 end
 
-                       
+function fetch_play_types(client::CfbdClient)
+    path = "plays/types"
+    results = fetch_url(client, path)
+    if results === nothing
+        return nothing
+    end
+    SQLite.execute(client.db, "BEGIN TRANSACTION")
+    SQLite.execute(client.db, """
+CREATE TABLE IF NOT EXISTS PlayType (
+    id INTEGER PRIMARY KEY NOT NULL,
+    text TEXT NOT NULL,
+    abbreviation TEXT
+);""")
+    stmt = SQLite.Stmt(client.db, "INSERT OR REPLACE INTO PlayType (id, text, abbreviation) VALUES (?, ?, ?)")
+    for item in results
+        SQLite.execute(stmt, (item.id, item.text, item.abbreviation))
+    end
+    SQLite.execute(client.db, "COMMIT TRANSACTION")
+end
+
 function fetch_plays(client::CfbdClient, season::Int, week::Int; seasonType::Union{String,Nothing}=nothing)
     path = "plays?year=$(season)&week=$(week)"
     if seasonType !== nothing
